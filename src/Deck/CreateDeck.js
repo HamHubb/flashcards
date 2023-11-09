@@ -1,46 +1,44 @@
-import React, { Link, useEffect, useState } from "react";
-import { createDeck } from  '../utils/api';
+import React, { useState } from "react";
+import { createDeck } from "../utils/api";
+import { Link, useHistory } from "react-router-dom";
+import DeckForm from '../FormComponents/DeckForm'
 
 function CreateDeck() {
-    const [decks, setDecks] = useState([])
-    useEffect (() => {
-        createDeck()
-        .then(data => setDecks(data))
-    }, [])
-    return <div>
-        <nav aria-label="breadcrumb">
-            <ol className="breadcrumb">
-                <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                <li className="breadcrumb-item active" aria-current="page">Create Deck</li>
-            </ol>
-        </nav>
-        <div>
-            Create Deck
-        </div>
-         {/* <form>
-          <label>Name</label>
-           <input type="text"></input>
-          <label>Description</label>
-           <textarea type="text" row={5}>
-            Brief description of the deck
-           </textarea>
-         <button>Cancel </button>
-         <button>Submit</button>
+  
+  const newDeck = {
+        name: "",
+        description: "",
+        cards: [], //empty array
+    };
+  const [formData, setFormData] = useState(newDeck)
+    
+  const history = useHistory();
+    
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    const createdDeck = await createDeck(newDeck);
+    history.push(`/decks/${createdDeck.id}`);
+  };
 
-        </form> */}
+  return (
+    <div>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <Link to="/">Home</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            Create Deck
+          </li>
+        </ol>
+      </nav>
+      <div>
+        <h2>Create Deck</h2>
+        <DeckForm formData={formData} setFormData={setFormData} handleSubmit={handleSubmit}/>
+      </div>
     </div>
+  );
 }
 
-
 export default CreateDeck;
-
-// export async function createDeck(deck, signal) {
-//     const url = `${API_BASE_URL}/decks`;
-//     const options = {
-//       method: "POST",
-//       headers,
-//       body: JSON.stringify(stripCards(deck)),
-//       signal,
-//     };
-//     return await fetchJson(url, options, {});
-//   }

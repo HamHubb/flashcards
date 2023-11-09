@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useHistory } from 'react-router-dom'
-import { listDecks, readDeck, deleteDeck } from  '../utils/api';
+import { listDecks, deleteDeck } from  '../utils/api';
 // import  Study  from '../Study';
 
 
@@ -52,8 +52,7 @@ function Home() {
                 </div>
                 <p className="pr-5">{d.description}</p>
                  <div>
-                    <Link to="" className="col-2 btn btn-secondary"> View</Link>
-                    {/*i need to import readDeck from ../api/index in order to get the card's deckId*/}
+                    <Link to="" className="col-2 btn btn-secondary"> View</Link>                   
                     <Link to={`/decks/${d.id}/study`} class="col-2 btn btn-primary">Study</Link>
                     <button className="col-1 offset-7 btn btn-danger" onClick={handleDelete}>&#128465;</button>
                  </div>
