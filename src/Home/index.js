@@ -1,64 +1,63 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { listDecks, deleteDeck } from  '../utils/api';
-// import  Study  from '../Study';
 
-
-
-// export async function readDeck(deckId, signal) {
-//     const url = `${API_BASE_URL}/decks/${deckId}?_embed=cards`;
-//     return await fetchJson(url, { signal }, {});
-//   }
 
 
 function Home() {
-    const [decks, setDecks] = useState([])
-    const {deckId} = useParams();
-    const deck = decks.find((deck) => deck.id === Number(deckId))
-    
+    const [decks, setDecks] = useState([]);
     useEffect(() => {
         listDecks()       
-        .then(data => setDecks(data))
+        .then(setDecks)
         
     }, [])
     
-    // const [cards, setCards] = useState([])
-    // useEffect(()=>{
-    //     readDeck(deckId)
-    //     .then(data => setCards(data))
-    // }, [])
-    //fetch('....')
-    
-    
-    const history = useHistory();
-
-    const handleDelete = async() => {
-      const result = window.confirm("Delete this deck?")
+    const handleDelete = async(deckId) => {
+      const result = window.confirm("Delete this deck? \n \n You will not be able to recover this.")
       if (result) {
-        await deleteDeck(deck);
-        history.push('/')
+        await deleteDeck(deckId)  
+        window.location.reload();
       }
     }
+    
     return <div >
-        <Link to="/decks/new"  className="btn btn-secondary">
-           + Create Deck
-        </Link>
-          {decks.map((d) => (
-            <div className="container border pt-2 pb-2" >
-                <div >
-                    <p>{d.name}</p>
-                    {/* <p>{d.length}</p>
-                    {console.log(d.length)} */}
+    <Link to="/decks/new"  className="btn btn-secondary mb-2">
+     + Create Deck
+    </Link>
+      {decks.map((d) => (
+       <div key={d.id} className="container border pt-2 pb-2" >
+         <div className="row ">
+          <div className="col-8 d-flex">
+           <p>{d.name}</p>
+          </div>
+          <div className="col-4 d-flex justify-content-end">
+           <p>{d.cards.length} cards</p>
+          </div>
+        </div>
+          <p className="pr-5">{d.description}</p>
+            <div className="row">
+              <div className="col-8 d-flex ">
+                <div className="btn btn-secondary mr-2">
+                <Link className="text-white" 
+                to={`/decks/${d.id}`} ><i className="bi bi-eye-fill "></i> View</Link>                   
                 </div>
-                <p className="pr-5">{d.description}</p>
-                 <div>
-                    <Link to="" className="col-2 btn btn-secondary"> View</Link>                   
-                    <Link to={`/decks/${d.id}/study`} class="col-2 btn btn-primary">Study</Link>
-                    <button className="col-1 offset-7 btn btn-danger" onClick={handleDelete}>&#128465;</button>
-                 </div>
+                  <div className="btn btn-primary">
+                 <Link className="text-white" 
+                 to={`/decks/${d.id}/study`} 
+                 >Study</Link>
+                  </div>
+              </div>
+              <div className="col-4 d-flex justify-content-end">
+                <button 
+                className="btn btn-danger" 
+                onClick={(() => handleDelete(d.id))}
+                >&#128465;</button>
+              </div>
+            </div>
             </div>
           ))}
     </div>
 }
 
 export default Home
+

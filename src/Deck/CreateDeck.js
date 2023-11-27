@@ -4,22 +4,24 @@ import { Link, useHistory } from "react-router-dom";
 import DeckForm from '../FormComponents/DeckForm'
 
 function CreateDeck() {
-  
-  const newDeck = {
+const newDeck = {
         name: "",
         description: "",
-        cards: [], //empty array
+        cards: [], 
     };
   const [formData, setFormData] = useState(newDeck)
-    
-  const history = useHistory();
+const history = useHistory();
     
   const handleSubmit = async (event) => {
     event.preventDefault();
     
-    const createdDeck = await createDeck(newDeck);
-    history.push(`/decks/${createdDeck.id}`);
-  };
+    try{
+const createdDeck = await createDeck(formData);
+      history.push(`/decks/${createdDeck.id}`);
+    } catch (error) {
+      console.error("Submit error:", error)
+    }
+};
 
   return (
     <div>
