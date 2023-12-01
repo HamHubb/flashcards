@@ -9,14 +9,18 @@ const newDeck = {
         description: "",
         cards: [], 
     };
-  const [formData, setFormData] = useState(newDeck)
+const [formData, setFormData] = useState(newDeck)
 const history = useHistory();
     
   const handleSubmit = async (event) => {
     event.preventDefault();
     
     try{
-const createdDeck = await createDeck(formData);
+const createdDeck = await createDeck({
+  name: formData.name,
+  description: formData.description,
+  cards: formData.cards,
+});
       history.push(`/decks/${createdDeck.id}`);
     } catch (error) {
       console.error("Submit error:", error)

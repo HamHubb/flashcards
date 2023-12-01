@@ -23,7 +23,7 @@ function EditDeck() {
             description: loadedDeck.description,
             cards: loadedDeck.cards
           })
-          console.log(loadedDeck.cards)
+          // console.log(loadedDeck.cards)
         } catch (error) {
             console.error("Deck loading data:", error);
         }
@@ -47,7 +47,7 @@ function EditDeck() {
 }
 
   };
-  console.log(formData.cards)
+  // console.log(formData.cards)
   return (
     <div>
       <nav aria-label="breadcrumb">

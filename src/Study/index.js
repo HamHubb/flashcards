@@ -14,7 +14,7 @@ function Study() {
         readDeck(deckId)
         .then(data => setDeck(data))
     }, [deckId])
-console.log(deck)
+// console.log(deck)
     const clickHandler = () => {
       setShowBack(!showBack);
     }

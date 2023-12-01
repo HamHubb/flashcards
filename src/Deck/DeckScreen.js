@@ -19,7 +19,6 @@ function DeckScreen(){
           console.error("Error getting deck", error)
         }
       }
-      
         getData();
     }, [deckId])
     // console.log(cardId)

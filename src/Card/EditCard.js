@@ -49,7 +49,7 @@ function EditCard() {
         "deckId": Number(deckId),
         "id": Number(cardId)
     };
-    console.log("updatedCard is:", updatedCard)
+    // console.log("updatedCard is:", updatedCard)
     await updateCard(updatedCard)
 
     history.goBack();

@@ -11,27 +11,31 @@ function DeckForm( { formData, setFormData, handleSubmit} ) {
   
     return (
     <form onSubmit={handleSubmit}>
-          <label className="form-label">Name</label>
+          <label className="form-label" htmlFor="name">Name</label>
           <input
+            id="name"
             required
-            placeholder={formData.name}
+            placeholder={formData.name  || ""}
             className="form-control"
             type="text"
             value={formData.name}
             onChange={(event) => setFormData({...formData, name: event.target.value})}
+            autoComplete='off'
           />
-          <label className="form-label">Description</label>
+          <label className="form-label" htmlFor="description">Description</label>
           <textarea
+            id="description"
             required
-            placeholder={formData.description}
+            placeholder={formData.description  || ""}
             className="form-control"
             type="text"
             rows="3"
             value={formData.description}
             onChange={(event) => setFormData({...formData, description: event.target.value})}
+            autoComplete='off'
           >
           </textarea>
-          <button className="btn btn-secondary" type="button" onClick={handleCancel}>
+          <button className="btn btn-secondary mr-2" type="button" onClick={handleCancel}>
             Cancel
           </button>
           <button className="btn btn-primary " type="submit">Submit</button>
