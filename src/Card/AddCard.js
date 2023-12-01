@@ -10,6 +10,8 @@ function AddCard(){
     useEffect(()=>{
         readDeck(deckId)
         .then(data => setCards(data))
+
+        
     }, [deckId])
     
     const newCard = {
@@ -28,6 +30,7 @@ function AddCard(){
         const createdCard = await createCard(deckId, formData);
         resetForm();
     };
+
     return (
         <div>
           <nav aria-label="breadcrumb">
@@ -45,7 +48,7 @@ function AddCard(){
       </nav>
       <div>
         <h2>{cards.name}: Add Card</h2>
-        <CardForm formData={formData} setFormData={setFormData} handleSubmit={handleSubmit}/>
+        <CardForm formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />
       </div> 
         </div>
     )

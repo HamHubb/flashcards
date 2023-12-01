@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import { useHistory } from "react-router-dom";
 
 
@@ -8,8 +8,7 @@ function CardForm( { formData, setFormData, handleSubmit} ) {
   const handleCancel = (()=> {
     history.goBack();
   })
-  
-  
+
     return (
     <form onSubmit={handleSubmit}>
           <label className="form-label" htmlFor="Front">Front</label>
@@ -20,7 +19,7 @@ function CardForm( { formData, setFormData, handleSubmit} ) {
             className="form-control"
             type="text"
             value={formData.front}
-            
+            // onClick={onClickClear} 
             onChange={(event) => setFormData({...formData, front: event.target.value})}
             autoComplete='off'
           >
@@ -34,7 +33,7 @@ function CardForm( { formData, setFormData, handleSubmit} ) {
             type="text"
             rows="3"
             value={formData.back}
-            
+            // onClick={onClickClear}
             onChange={(event) => setFormData({...formData, back: event.target.value})}
             autoComplete='off'
           >

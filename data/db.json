@@ -11,9 +11,9 @@
       "id": 2
     },
     {
-      "id": 3,
-      "name": "Newer",
-      "description": "Desesd"
+      "name": "fdsa",
+      "description": "asdf",
+      "id": 3
     }
   ],
   "cards": [
@@ -48,22 +48,10 @@
       "id": 5
     },
     {
-      "front": "newest",
-      "back": "newest",
+      "front": "Front side of cardd",
+      "back": "Back side of cards",
       "deckId": 3,
-      "id": 7
-    },
-    {
-      "front": "Front side of card",
-      "back": "Back side of card",
-      "deckId": 3,
-      "id": 8
-    },
-    {
-      "front": "Front side of cardssssssss",
-      "back": "Back side of cardddddd",
-      "deckId": 3,
-      "id": 9
+      "id": 6
     }
   ]
 }
